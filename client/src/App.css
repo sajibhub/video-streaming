@@ -1,0 +1,67 @@
+/* Layout */
+.app-container {
+  height: 100vh;
+  width: 100%;
+  background-color: #f4f4f4;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Title */
+.video-title {
+  margin-bottom: 20px;
+  color: #333;
+  font-size: 1.5rem;
+  text-align: center;
+}
+
+/* Video */
+.video-player {
+  width: 80%;
+  max-width: 720px;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  margin-bottom: 20px;
+}
+
+@media (min-width: 768px) {
+  .video-player {
+    width: 60%;
+  }
+}
+
+/* Controls container */
+.controls {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+/* Button */
+.switch-button {
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #007BFF;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+}
+
+.switch-button:hover {
+  background-color: #0056b3;
+}
+
+/* Quality Dropdown */
+.quality-select {
+  padding: 8px 12px;
+  font-size: 15px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  cursor: pointer;
+}

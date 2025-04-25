@@ -10,8 +10,10 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "hls.js": "^1.6.2",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react-dom": "^19.0.0",
+    "remove": "^0.1.5"
   },
   "devDependencies": {
     "@eslint/js": "^9.22.0",
