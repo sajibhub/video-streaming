@@ -1,0 +1,44 @@
+/* App Container */
+.app-container {
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #f4f4f4;
+}
+
+/* Title Style */
+.title {
+  margin-bottom: 20px;
+  color: #333;
+}
+
+/* Video Player */
+.video-player {
+  width: 80%;
+  max-width: 720px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  margin-bottom: 20px;
+}
+
+/* Button */
+.switch-button {
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #007BFF;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Media Query for larger screens */
+@media (min-width: 768px) {
+  .video-player {
+    width: 60%;
+  }
+}
