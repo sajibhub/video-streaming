@@ -22,7 +22,7 @@ const App = () => {
         onContextMenu={(e) => e.preventDefault()}
         src={
           selfHost
-            ? `${import.meta.env.VITE_API_URL}/self-hosted'`
+            ? `${import.meta.env.VITE_API_URL}/self-hosted`
             : `${import.meta.env.VITE_API_URL}/stream-external`
         }
       />
