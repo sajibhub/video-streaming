@@ -2,11 +2,14 @@
 .app-container {
   height: 100vh;
   width: 100%;
-  background-color: #f4f4f4;
+  background: linear-gradient(135deg, #f4f4f4 0%, #e0e0e0 100%);
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  font-family: Arial, sans-serif;
+  padding: 20px;
+  box-sizing: border-box;
 }
 
 /* Title */
@@ -21,9 +24,16 @@
 .video-player {
   width: 80%;
   max-width: 720px;
+  aspect-ratio: 16 / 9;
   border-radius: 10px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
   margin-bottom: 20px;
+  object-fit: cover;
+  transition: box-shadow 0.3s ease;
+}
+
+.video-player:hover {
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
 }
 
 @media (min-width: 768px) {
@@ -35,8 +45,11 @@
 /* Controls container */
 .controls {
   display: flex;
-  gap: 10px;
+  justify-content: center;
   align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 10px;
 }
 
 /* Button */
@@ -48,12 +61,22 @@
   border: none;
   border-radius: 6px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.3s ease, transform 0.1s ease, box-shadow 0.2s ease;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
 }
 
 .switch-button:hover {
   background-color: #0056b3;
+}
+
+.switch-button:focus {
+  outline: 2px solid #0056b3;
+  outline-offset: 2px;
+}
+
+.switch-button:active {
+  transform: scale(0.98);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
 }
 
 /* Quality Dropdown */
@@ -64,4 +87,10 @@
   border: 1px solid #ccc;
   background-color: #fff;
   cursor: pointer;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.quality-select:hover {
+  border-color: #007BFF;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
