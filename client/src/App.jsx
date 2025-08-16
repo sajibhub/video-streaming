@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './App.css'; // Make sure this path points to where your CSS is saved
+import './App.css';
 
 const App = () => {
   const [selfHost, setSelfHost] = useState(false);
@@ -8,23 +8,26 @@ const App = () => {
     setSelfHost(!selfHost);
   };
 
+  const videoSrc = selfHost
+    ? `${import.meta.env.VITE_API_URL}/self-hosted`
+    : `${import.meta.env.VITE_API_URL}/stream-external`;
+
+  const videoTitle = selfHost
+    ? 'Now Playing: Self-Hosted Video'
+    : 'Now Playing: External Video (Cloudinary)';
+
   return (
     <div className="app-container">
-      <h2 className="video-title">
-        {selfHost
-          ? 'Now Playing: Self-Hosted Video'
-          : 'Now Playing: External Video (Cloudinary)'}
-      </h2>
+      <h2 className="video-title">{videoTitle}</h2>
 
       <video
+        key={selfHost ? 'self' : 'external'} // forces reload on switch
         className="video-player"
         controls
+        autoPlay
+        muted
         onContextMenu={(e) => e.preventDefault()}
-        src={
-          selfHost
-            ? `${import.meta.env.VITE_API_URL}/self-hosted`
-            : `${import.meta.env.VITE_API_URL}/stream-external`
-        }
+        src={videoSrc}
       />
 
       <div className="controls">
