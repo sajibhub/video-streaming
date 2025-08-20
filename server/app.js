@@ -9,6 +9,8 @@ const PORT = 3001;
 
 app.use(cors());
 
+const VIDEO_URL = 'https://res.cloudinary.com/ddsmokd7b/video/upload/v1755686868/SSYouTube.online_BEST_RECITATION_EVER_Al-Mu_minun_-_Yasir_ad-Dawsari_1080p_hu27jy.mp4';
+
 // Self-hosted video streaming
 app.get('/stream-self-hosted', (req, res) => {
   const videoPath = path.join(process.cwd(), './videos/video.mp4');
@@ -18,9 +20,10 @@ app.get('/stream-self-hosted', (req, res) => {
   const range = req.headers.range;
   if (!range) return res.status(400).send('Requires Range header');
 
-  const [startStr, endStr] = range.replace('bytes=', '').split('-');
+  const CHUNK_SIZE = 1024 * 1024;
+  const [startStr] = range.replace(/bytes=/, "").split("-");
   const start = parseInt(startStr, 10);
-  const end = endStr ? parseInt(endStr, 10) : videoSize - 1;
+  const end = Math.min(start + CHUNK_SIZE - 1, videoSize - 1);
   const contentLength = end - start + 1;
 
   res.writeHead(206, {
@@ -37,16 +40,22 @@ app.get('/stream-self-hosted', (req, res) => {
 
 // External video streaming
 app.get('/stream-external', (req, res) => {
-  const VIDEO_URL = 'https://res.cloudinary.com/ddsmokd7b/video/upload/v1755686868/SSYouTube.online_BEST_RECITATION_EVER_Al-Mu_minun_-_Yasir_ad-Dawsari_1080p_hu27jy.mp4';
   const range = req.headers.range;
   if (!range) return res.status(400).send('Requires Range header');
+
+  const CHUNK_SIZE = 1024 * 1024;
+
+  const [startStr] = range.replace(/bytes=/, "").split("-");
+  const start = parseInt(startStr, 10);
+  const end = start + CHUNK_SIZE - 1;
+  const byteRange = `bytes=${start}-${end}`;
 
   const url = new URL(VIDEO_URL);
 
   https.get({
     hostname: url.hostname,
     path: url.pathname + url.search,
-    headers: { Range: range },
+    headers: { Range: byteRange },
   }, (videoRes) => {
     res.writeHead(videoRes.statusCode, {
       'Content-Range': videoRes.headers['content-range'] || '',
@@ -56,6 +65,7 @@ app.get('/stream-external', (req, res) => {
       'Cache-Control': 'no-store',
       'X-No-Download': 'true',
     });
+
     videoRes.pipe(res);
   }).on('error', (err) => {
     console.error(err);
