@@ -10,7 +10,7 @@ const PORT = 3001;
 app.use(cors());
 
 // Self-hosted video streaming
-app.get('/self-hosted', (req, res) => {
+app.get('/stream-self-hosted', (req, res) => {
   const videoPath = path.join(process.cwd(), './videos/video.mp4');
   if (!fs.existsSync(videoPath)) return res.status(404).send('Video not found');
 
@@ -37,7 +37,7 @@ app.get('/self-hosted', (req, res) => {
 
 // External video streaming
 app.get('/stream-external', (req, res) => {
-  const VIDEO_URL = 'https://res.cloudinary.com/ddsmokd7b/video/upload/v1745404649/video_op6ojq.mp4';
+  const VIDEO_URL = 'https://res.cloudinary.com/ddsmokd7b/video/upload/v1755686868/SSYouTube.online_BEST_RECITATION_EVER_Al-Mu_minun_-_Yasir_ad-Dawsari_1080p_hu27jy.mp4';
   const range = req.headers.range;
   if (!range) return res.status(400).send('Requires Range header');
 
@@ -63,7 +63,7 @@ app.get('/stream-external', (req, res) => {
   });
 });
 
-// Health check
+
 app.get('/', (req, res) => res.send('Server running ✅'));
 
 app.listen(PORT, () => console.log(`Server running at http://localhost:${PORT}`));
